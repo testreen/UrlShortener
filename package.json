@@ -2,8 +2,9 @@
   "name": "urlshortener",
   "version": "1.0.0",
   "description": "Truecaller code challenge submission. Provides one endpoint that shortens a given URL and one endpoint that unshortens a given URL.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js --exec babel-node --",
     "test": "mocha --require babel-register tests/*.js --exit"
   },
   "repository": {
@@ -21,5 +22,20 @@
   "bugs": {
     "url": "https://github.com/testreen/UrlShortener/issues"
   },
-  "homepage": "https://github.com/testreen/UrlShortener#readme"
+  "homepage": "https://github.com/testreen/UrlShortener#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "hashids": "^1.2.2",
+    "nanoid": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^6.1.3",
+    "nodemon": "^1.18.11"
+  }
 }
