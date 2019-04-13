@@ -3,10 +3,8 @@ import { toNumbers, fromNumbers } from '../util/util';
 
 var hashids = new Hashids("this is my salt");
 
-/**
- * Class used to handle incoming requests
- */
-export default class UrlController {
+/** Class used to handle incoming requests. */
+class UrlController {
 
   /**
    * Converts incoming long URL to shortened URL
@@ -39,3 +37,5 @@ export default class UrlController {
     return res.redirect(longUrl);
   }
 }
+
+export default UrlController;

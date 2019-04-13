@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="shortenUrl"><span class="type-signature"></span>shortenUrl<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="fromNumbers"><span class="type-signature"></span>fromNumbers<span class="signature">(nums)</span><span class="type-signature"> &rarr; {String}</span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    Converts incoming long URL to shortened URL
+    Returns decoded string from array of base 10 integers
 </div>
 
 
@@ -148,13 +148,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>nums</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">Array</span>
 
 
             
@@ -164,30 +164,7 @@
 
             
 
-            <td class="description last">Request information</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Response object</td>
+            <td class="description last">Encoded integer array</td>
         </tr>
 
     
@@ -228,7 +205,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="urlController.js.html">urlController.js</a>, <a href="urlController.js.html#line17">line 17</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -255,7 +232,7 @@
 
         
 <div class="param-desc">
-    Shortened URL
+    String of decoded integers into characters
 </div>
 
 
@@ -284,7 +261,7 @@
     
 
     
-    <h4 class="name" id="unshortenUrl"><span class="type-signature"></span>unshortenUrl<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="reduceArray"><span class="type-signature"></span>reduceArray<span class="signature">(nums)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -292,7 +269,7 @@
 
 
 <div class="description">
-    Converts incoming shortened URL to original URL
+    Reduces array size by concatenating 3 digit integers into 15 digit integer strings
 </div>
 
 
@@ -328,13 +305,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>nums</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">Array</span>
 
 
             
@@ -344,30 +321,7 @@
 
             
 
-            <td class="description last">Request information</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Response object</td>
+            <td class="description last">Initial array of 3 digit integers or strings</td>
         </tr>
 
     
@@ -408,7 +362,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="urlController.js.html">urlController.js</a>, <a href="urlController.js.html#line30">line 30</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -435,7 +389,299 @@
 
         
 <div class="param-desc">
-    Redirect to original URL
+    As many arrays as possible concatenated into integer strings of length 15
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toNumbers"><span class="type-signature"></span>toNumbers<span class="signature">()</span><span class="type-signature"> &rarr; {Integer}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Encodes string to array of base 10 integers to avoid rounding, based on:
+https://stackoverflow.com/questions/21613942/encode-string-into-decimal-digits-javascript
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Array of encoded strings into integers with desired length 15 digits.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Integer</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="zeroPad"><span class="type-signature"></span>zeroPad<span class="signature">(n, w)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Make sure each character is encoded into 3 digits
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">String or Integer to be padded</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>w</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Integer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Desired length of String or Integer</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Padded string
 </div>
 
 
@@ -474,13 +720,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#shortenUrl">shortenUrl</a></li><li><a href="global.html#unshortenUrl">unshortenUrl</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#fromNumbers">fromNumbers</a></li><li><a href="global.html#reduceArray">reduceArray</a></li><li><a href="global.html#toNumbers">toNumbers</a></li><li><a href="global.html#zeroPad">zeroPad</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 13 2019 23:16:07 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 13 2019 23:36:05 GMT+0200 (GMT+02:00)
 </footer>
 
 <script> prettyPrint(); </script>

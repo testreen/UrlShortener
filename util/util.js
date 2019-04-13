@@ -1,8 +1,8 @@
 /**
  * Make sure each character is encoded into 3 digits
- * @param  {[type]} n [description]
- * @param  {[type]} w [description]
- * @return {[type]}   [description]
+ * @param  {String|Integer} n String or Integer to be padded
+ * @param  {Integer} w Desired length of String or Integer
+ * @return {String}   Padded string
  */
 function zeroPad(n, w){
     while(n.toString().length<w) n = '0' + n;
@@ -10,9 +10,9 @@ function zeroPad(n, w){
 }
 
 /**
- * Reduces array size by concatenating into 15 digit integers
- * @param  {[type]} nums [description]
- * @return {[type]}      [description]
+ * Reduces array size by concatenating 3 digit integers into 15 digit integer strings
+ * @param  {Array} nums Initial array of 3 digit integers or strings
+ * @return {Array}      As many arrays as possible concatenated into integer strings of length 15
  */
 function reduceArray(nums){
     var arr = [];
@@ -30,7 +30,7 @@ function reduceArray(nums){
 /**
  * Encodes string to array of base 10 integers to avoid rounding, based on:
  * https://stackoverflow.com/questions/21613942/encode-string-into-decimal-digits-javascript
- * @return {Integer} Integer hash of string
+ * @return {Integer} Array of encoded strings into integers with desired length 15 digits.
  */
 export function toNumbers(s){
     var nums = [];
@@ -43,8 +43,8 @@ export function toNumbers(s){
 
 /**
  * Returns decoded string from array of base 10 integers
- * @param  {[type]} nums [description]
- * @return {[type]}      [description]
+ * @param  {Array} nums Encoded integer array
+ * @return {String}      String of decoded integers into characters
  */
 export function fromNumbers(nums){
     var s = '';
