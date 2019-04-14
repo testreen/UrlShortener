@@ -35,7 +35,6 @@ class UrlController {
     if(!checkHttp.test(longUrl)){
       longUrl = 'https://' + longUrl;
     };
-    res.send(longUrl);
     return res.redirect(longUrl);
   }
 }
