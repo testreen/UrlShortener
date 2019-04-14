@@ -1,5 +1,6 @@
 import Hashids from 'hashids';
 import { toNumbers, fromNumbers } from '../util/util';
+import 'babel-polyfill';
 
 var hashids = new Hashids("this is my salt");
 
@@ -12,8 +13,8 @@ class UrlController {
    * @param  {Object} res Response object
    * @return {String}     Shortened URL
    */
-  static shortenUrl(req, res){
-    var longUrl = req.url.slice(1); // Remove initial /
+  static async shortenUrl(req, res){
+    var longUrl = req.url.slice(1).toLowerCase(); // Remove initial / and make lowercase
     longUrl = longUrl.replace(/^http(s?):\/\//i, ""); // Remove http(s)://
     var shortUrl = hashids.encode(toNumbers(longUrl));
     return res.send(shortUrl);
@@ -34,6 +35,7 @@ class UrlController {
     if(!checkHttp.test(longUrl)){
       longUrl = 'https://' + longUrl;
     };
+    res.send(longUrl);
     return res.redirect(longUrl);
   }
 }

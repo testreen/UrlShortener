@@ -24,6 +24,9 @@ function reduceArray(nums){
         temp = '';
       }
     }
+    if(temp != ''){
+      arr.push(temp)
+    }
     return arr;
 }
 
@@ -37,7 +40,6 @@ export function toNumbers(s){
     for(var i=0; i<s.length; i++) {
         nums.push(zeroPad(s.charCodeAt(i), 3));
     }
-
     return reduceArray(nums);
 }
 
@@ -49,7 +51,9 @@ export function toNumbers(s){
 export function fromNumbers(nums){
     var s = '';
     for(var i=0; i<nums.length; i++){
-        s += String.fromCharCode(nums[i]);
+        for(var j=0; j<nums[i].toString().length; j+=3){
+          s += String.fromCharCode(nums[i].toString().substring(j,j+3));
+        }
     }
     return s;
 }
