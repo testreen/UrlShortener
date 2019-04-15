@@ -16,7 +16,6 @@ class UrlControllerPermanent {
   static shortenUrl(req) {
     var longUrl = req.url.slice(11).toLowerCase(); // Remove initial '/permanent' and make lowercase
     longUrl = longUrl.replace(/^http(s?):\/\//i, ""); // Remove 'http(s)://'
-    console.log(toNumbers(longUrl));
     return req.headers.host + "/" + hashids.encode(toNumbers(longUrl)); // Return valid URL
   }
 
@@ -31,11 +30,8 @@ class UrlControllerPermanent {
     var longUrl = fromNumbers(hashids.decode(shortUrl)); // Decode
 
     // Check if decoded result is valid URL
-    console.log(hashids.decode(shortUrl));
-    console.log(longUrl);
     var urlRegex = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/i;
     if (!urlRegex.test(longUrl)) {
-      console.log("und");
       return undefined;
     }
 
