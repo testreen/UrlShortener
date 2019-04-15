@@ -12,46 +12,142 @@ describe("Url handling", () => {
   // Test to send an original URL or shortened URL
   describe("GET /:string", () => {
     var app;
-    beforeEach(function () {
+    var url;
+    beforeEach(function (done) {
       app = require('../server', { bustCache: true });
-    });
-
-    it("should return a shortened URL when passing long URL with http prefix", (done) => {
       chai.request(app)
-        .get('/http://www.someurl.com')
-        .end((err,res) => {
-          res.should.have.status(200);
-          res.text.should.be.a('string');
-          done();
-        });
+          .get('/www.someurl.com')
+          .end((err,res) => {
+              url = res.text; // Record the response for the tests.
+              done(); // Tell mocha that the ``before`` callback is done.
+          });
     });
 
-    it("should return a shortened URL when passing long URL with https prefix", (done) => {
-      chai.request(app)
-        .get('/https://www.someurl.com')
-        .end((err,res) => {
-          res.should.have.status(200);
-          res.text.should.be.a('string');
-          done();
-      });
-    });
-
-    it("should return a shortened URL when passing long URL without http(s) prefix", (done) => {
+    it("should return the same result with http://, https:// and without http(s)://", (done) => {
+      var url;
       chai.request(app)
         .get('/www.someurl.com')
         .end((err,res) => {
             res.should.have.status(200);
             res.text.should.be.a('string');
+            url = res.text.substr(res.text.lastIndexOf('/') + 1);
+        });
+      chai.request(app)
+        .get('/http://www.someurl.com')
+        .end((err,res) => {
+            res.should.have.status(200);
+            res.text.should.be.a('string');
+            res.text.substr(res.text.lastIndexOf('/') + 1).should.be.equal(url);
+        });
+      chai.request(app)
+        .get('/https://www.someurl.com')
+        .end((err,res) => {
+            res.should.have.status(200);
+            res.text.should.be.a('string');
+            res.text.substr(res.text.lastIndexOf('/') + 1).should.be.equal(url);
+        });
+      done();
+    })
+
+    it("should redirect to an original URL when passing shortened URL", (done) => {
+
+      chai.request(app)
+        .get(url)
+        .redirects(0)
+        .send()
+      done();
+    });
+
+    it("should return a 404 status when passing incorrect original URL", (done) => {
+      chai.request(app)
+        .get('/www.someurl')
+        .end((err,res) => {
+            res.should.have.status(404);
+            res.text.should.be.a('string');
             done();
         });
     });
 
+    it("should return a 404 status when passing incorrect shortened URL", (done) => {
+      chai.request(app)
+        .get('/-abcdefg')
+        .end((err,res) => {
+            res.should.have.status(404);
+            res.text.should.be.a('string');
+            done();
+        });
+    });
+  })
+
+  describe("GET /permanent/:string", () => {
+    var app;
+    var url;
+    beforeEach(function (done) {
+      app = require('../server', { bustCache: true });
+      chai.request(app)
+          .get('/permanent/www.someurl.com')
+          .end((err,res) => {
+              url = res.text; // Record the response for the tests.
+              done(); // Tell mocha that the ``before`` callback is done.
+          });
+    });
+
+    it("should return the same result with http://, https:// and without http(s)://", (done) => {
+      var url;
+      chai.request(app)
+        .get('/permanent/www.someurl.com')
+        .end((err,res) => {
+            res.should.have.status(200);
+            res.text.should.be.a('string');
+            url = res.text.substr(res.text.lastIndexOf('/') + 1);
+        });
+      chai.request(app)
+        .get('/permanent/http://www.someurl.com')
+        .end((err,res) => {
+            res.should.have.status(200);
+            res.text.should.be.a('string');
+            res.text.substr(res.text.lastIndexOf('/') + 1).should.be.equal(url);
+        });
+      chai.request(app)
+        .get('/permanent/https://www.someurl.com')
+        .end((err,res) => {
+            res.should.have.status(200);
+            res.text.should.be.a('string');
+            res.text.substr(res.text.lastIndexOf('/') + 1).should.be.equal(url);
+        });
+      done();
+    })
+
     it("should redirect to an original URL when passing shortened URL", (done) => {
-      const resp = chai.request(app)
-        .get('/Ol2Y3ayoEEsp1mppKy7rta9zLpqabg')
+
+      chai.request(app)
+        .get(url)
         .redirects(0)
-        .send();
+        .send()
       done();
     });
+
+    it("should return a 404 status when passing incorrect original URL", (done) => {
+      chai.request(app)
+        .get('/permanent/www.someurl')
+        .end((err,res) => {
+            res.should.have.status(404);
+            res.text.should.be.a('string');
+            done();
+        });
+    });
+
+    it("should return a 404 status when passing incorrect shortened URL", (done) => {
+      chai.request(app)
+        .get('/abcdefg')
+        .end((err,res) => {
+            res.should.have.status(404);
+            res.text.should.be.a('string');
+            done();
+        });
+    });
+
+
+
   })
 })

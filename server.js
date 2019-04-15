@@ -5,22 +5,22 @@ import routes from './routes/index';
 // Instantiate express
 const app = express();
 
-// Set our port
+// Set the server port
 const port = process.env.PORT || 8000;
 
-// Configure app to user bodyParser
+// Configure app to use bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Register our routes in app
+// Register the routes in app
 app.use('/', routes);
 
 // If response status 404
 app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).send("Sorry, incorrect original or shortened URL entered!")
 })
 
-// Start our server
+// Start the server
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });

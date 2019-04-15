@@ -1,7 +1,7 @@
 {
   "name": "urlshortener",
   "version": "1.0.0",
-  "description": "Truecaller code challenge submission. Provides one endpoint that shortens a given URL and one endpoint that unshortens a given URL.",
+  "description": "Truecaller code challenge submission. Provides one endpoint that returns a shortened URL and one endpoint that redirects to the original URL.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js --exec babel-node --",
@@ -27,6 +27,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "hashids": "^1.2.2",
+    "lodash": "^4.17.11",
     "nanoid": "^2.0.1"
   },
   "devDependencies": {
