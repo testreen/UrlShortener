@@ -1,5 +1,5 @@
 # UrlShortener
-Truecaller code challenge submission. Supports both permanently usable links (although not a lot shorter than the original link) and session only links that resets when the server is restarted.
+Truecaller code challenge submission. Supports both permanently usable links (length proportional to original URL) and session only links (fixed 9 character length) that resets when the server is restarted.
 
 `npm install` or `yarn install` to install dependencies. 
 
