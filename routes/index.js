@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import UrlControllerPermanent from '../controllers/UrlControllerPermanent';
-import UrlControllerSession from '../controllers/urlControllerSession';
+import { Router } from "express";
+import UrlControllerPermanent from "../controllers/UrlControllerPermanent";
+import UrlControllerSession from "../controllers/urlControllerSession";
 
 const routes = Router();
 const session = new UrlControllerSession();
@@ -16,11 +16,11 @@ routes.get(urlRegex, (req, res) => {
 // Unshorten session only endpoint (if route matches Nano ID format
 // prefixed with '-' to avoid collision with permanent links)
 // https://github.com/ai/nanoid
-routes.get(RegExp('^\/-[A-Za-z0-9_-]+$'), (req, res) => {
+routes.get(RegExp("^/-[A-Za-z0-9_-]+$"), (req, res) => {
   // Decode session only links
   var url = session.unshortenUrl(req);
-  if(url === undefined){
-    return res.status(404).send("Sorry, incorrect shortened URL entered!")
+  if (url === undefined) {
+    return res.status(404).send("Sorry, incorrect shortened URL entered!");
   }
   res.redirect(301, url);
 });
@@ -35,13 +35,13 @@ routes.get(urlRegex, (req, res) => {
 
 // Unshorten permanent endpoint (if route matches Hashids format)
 // https://hashids.org
-routes.get(RegExp('^\/[A-Za-z0-9]+$'), (req, res) => {
+routes.get(RegExp("^/[A-Za-z0-9]+$"), (req, res) => {
   // Decode permanent links
   var url = UrlControllerPermanent.unshortenUrl(req);
-  if(url === undefined){
-    return res.status(404).send("Sorry, incorrect shortened URL entered!")
+  if (url === undefined) {
+    return res.status(404).send("Sorry, incorrect shortened URL entered!");
   }
-  res.redirect(301, url)
+  res.redirect(301, url);
 });
 
 export default routes;

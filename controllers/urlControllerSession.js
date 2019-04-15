@@ -11,7 +11,7 @@ class UrlControllerSession {
   }
 
   /**
-   * Converts incoming long URL to shortened URL using Nano ID, saved in map.
+   * Converts incoming long URL to shortened URL using Nano ID, saved in memory.
    * @param  {Object} req Request information
    * @param  {Object} res Response object
    * @return {String}     Shortened URL
@@ -19,17 +19,19 @@ class UrlControllerSession {
   shortenUrl(req) {
     var longUrl = req.url.slice(1).toLowerCase(); // Remove initial '/' and make lowercase
     longUrl = longUrl.replace(/^http(s?):\/\//i, ""); // Remove 'http(s)://'
-    var id = this.memory[longUrl]; // Find if URL already exists in memory
+
+    // Find if URL already exists in memory, otherwise add it
+    var id = this.memory[longUrl];
     if (id === undefined) {
-      // If URL is not in memory, add it
-      id = nanoid(10);
+      id = nanoid(8);
       this.memory[longUrl] = id;
     }
-    return req.headers.host + "/-" + id;
+
+    return req.headers.host + "/-" + id; // return valid URL
   }
 
   /**
-   * Converts incoming shortened URL to original URL from map
+   * Converts incoming shortened URL to original URL from memory
    * @param  {Object} req Request information
    * @param  {Object} res Response object
    * @return {String}     Original URL
@@ -37,8 +39,10 @@ class UrlControllerSession {
   unshortenUrl(req) {
     var id = req.url.slice(2); // Remove initial '/-'
 
-    // Retrieve URL from memory or return undefined if not found
-    var longUrl = _.findKey(this.memory, (old) => { return old === id; })
+    // Retrieve URL from memory, else return undefined if not found
+    var longUrl = _.findKey(this.memory, old => {
+      return old === id;
+    });
     if (longUrl === undefined) {
       return undefined;
     }

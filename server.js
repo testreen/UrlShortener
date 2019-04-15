@@ -1,6 +1,6 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import routes from './routes/index';
+import express from "express";
+import bodyParser from "body-parser";
+import routes from "./routes/index";
 
 // Instantiate express
 const app = express();
@@ -13,16 +13,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Register the routes in app
-app.use('/', routes);
+app.use("/", routes);
 
 // If response status 404
-app.use(function (req, res, next) {
-  res.status(404).send("Sorry, incorrect original or shortened URL entered!")
-})
+app.use(function(req, res, next) {
+  res.status(404).send("Sorry, incorrect original or shortened URL entered!");
+});
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
+  console.log(`Server started on port ${port}`);
 });
 
 module.exports = app;
