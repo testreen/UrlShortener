@@ -10,5 +10,3 @@ Go to localhost:8000/{url} to get a shortened URL that resets on server restart.
 Go to localhost:8000/permanent/{url} to get a (longer) shortened URL that persists on server restart.
 
 `npm test` to run mocha / chai unit test.
-
-API: https://testreen.github.io/UrlShortener/
