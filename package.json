@@ -28,7 +28,7 @@
     "express": "^4.16.4",
     "hashids": "^1.2.2",
     "lodash": "^4.17.11",
-    "nanoid": "^2.0.1"
+    "nanoid": "^3.1.31"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
