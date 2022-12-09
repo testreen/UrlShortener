@@ -25,7 +25,7 @@
   "homepage": "https://github.com/testreen/UrlShortener#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "hashids": "^1.2.2",
     "lodash": "^4.17.11",
     "nanoid": "^2.0.1"
